@@ -1,10 +1,12 @@
 #include "Core/Graphics/Window.hpp"
+#include "Sask/Window.hpp"
 #include <GLFW/glfw3.h>
 #include <Sask/Engine.hpp>
 #include <stdexcept>
 
-using core::graphics::Window;
 using sask::Engine;
+using sask::Window;
+
 Engine::Engine() {
   if (!glfwInit()) {
     glfwTerminate();
@@ -14,7 +16,9 @@ Engine::Engine() {
 
 Engine::~Engine() { glfwTerminate(); }
 
-Window *Engine::CreateWindow(std::string_view title, int32_t width,
-                             int32_t height) {
+Window *Engine::CreateWindow(const std::string_view title, const uint32_t width,
+                             const uint32_t height) {
   return new Window(title, width, height);
 }
+
+void Engine::PollEvents() { glfwPollEvents(); }

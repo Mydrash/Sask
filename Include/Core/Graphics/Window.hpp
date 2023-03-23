@@ -7,11 +7,11 @@
 
 namespace core::graphics {
 class Window {
-private:
+public:
   GLFWwindow *window;
 
-public:
-  Window(std::string_view title, uint32_t width, uint32_t height);
+  Window(const std::string_view title, const uint32_t width,
+         const uint32_t height);
   ~Window();
 };
 } // namespace core::graphics

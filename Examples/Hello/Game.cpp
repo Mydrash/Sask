@@ -3,7 +3,11 @@
 int main(void) {
   auto engine = new sask::Engine();
   auto window = engine->CreateWindow("Hello", 800, 600);
-  while (true)
-    ;
+  window->MakeCurrent();
+
+  while (!window->ShouldClose()) {
+    engine->PollEvents();
+  }
+
   return 0;
 }

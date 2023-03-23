@@ -5,7 +5,8 @@
 
 using core::graphics::Window;
 
-Window::Window(std::string_view title, uint32_t width, uint32_t height) {
+Window::Window(const std::string_view title, const uint32_t width,
+               const uint32_t height) {
   this->window = glfwCreateWindow(width, height, title.data(), 0, 0);
 }
 
