@@ -8,6 +8,6 @@ public:
   Engine();
   ~Engine();
 
-  Window CreateWindow(std::string_view Title, uint width, uint height);
+  Window *CreateWindow(std::string_view Title, uint width, uint height);
 };
 } // namespace sask
