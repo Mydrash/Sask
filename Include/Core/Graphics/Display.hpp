@@ -9,6 +9,7 @@ private:
   SDL_Window *Window;
 
 public:
-  Display(std::string Title, uint width, uint height);
+  Display(std::string_view Title, uint width, uint height);
+  ~Display();
 };
 } // namespace core::graphics
