@@ -1,13 +1,16 @@
 #pragma once
-#include <Sask/Window.hpp>
-#include <string_view>
 
+#include <Core/Graphics/Window.hpp>
+#include <cstdint>
+#include <string>
+#include <string_view>
 namespace sask {
 class Engine {
 public:
   Engine();
   ~Engine();
 
-  Window *CreateWindow(std::string_view Title, uint width, uint height);
+  core::graphics::Window *CreateWindow(std::string_view title, int32_t width,
+                                       int32_t height);
 };
 } // namespace sask
