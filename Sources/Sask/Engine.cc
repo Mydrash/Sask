@@ -6,7 +6,7 @@ namespace sask {
 Engine::Engine() { SDL_Init(SDL_INIT_VIDEO); }
 Engine::~Engine() { SDL_Quit(); }
 
-Window *Engine::CreateWindow(std::string_view Title, uint width, uint height) {
-  return new Window(Title, width, height);
+Window *Engine::CreateWindow(std::string_view title, uint width, uint height) {
+  return new Window(title, width, height);
 }
 } // namespace sask

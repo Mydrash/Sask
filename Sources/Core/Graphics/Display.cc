@@ -3,8 +3,8 @@
 
 using core::graphics::Display;
 
-Display::Display(std::string_view Title, uint width, uint height) {
-  this->Window = SDL_CreateWindow(Title.data(), SDL_WINDOWPOS_CENTERED,
+Display::Display(std::string_view title, uint width, uint height) {
+  this->Window = SDL_CreateWindow(title.data(), SDL_WINDOWPOS_CENTERED,
                                   SDL_WINDOWPOS_CENTERED, width, height, 0);
 }
 

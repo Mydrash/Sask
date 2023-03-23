@@ -8,7 +8,7 @@ private:
   core::graphics::Display Display;
 
 public:
-  Window(std::string_view Title, uint width, uint height)
-      : Display(Title, width, height) {}
+  Window(std::string_view title, uint width, uint height)
+      : Display(title, width, height) {}
 };
 } // namespace sask
