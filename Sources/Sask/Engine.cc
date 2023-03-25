@@ -23,6 +23,8 @@ Engine::Engine() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwSetErrorCallback(GLFWErrorHandler);
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LESS);
 }
 
 Engine::~Engine() { glfwTerminate(); }
