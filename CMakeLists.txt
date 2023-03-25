@@ -10,7 +10,7 @@ find_package(glfw3 ${GLFW_VERSION} QUIET)
 
 if (NOT glfw3_FOUND)
   include(FetchContent)
-   FetchContent_Declare(
+  FetchContent_Declare(
     glfw3
     URL https://github.com/glfw/glfw/releases/download/${GLFW_VERSION}/glfw-${GLFW_VERSION}.zip
   )
