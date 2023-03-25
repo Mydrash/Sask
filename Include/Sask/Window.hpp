@@ -22,7 +22,7 @@ public:
   void UpdateViewport();
   bool IsKeyDown(int key);
 
-  std::unique_ptr<std::string> GetRenderer();
-  std::unique_ptr<std::string> GetOpenGLVersion();
+  std::shared_ptr<std::string> GetRenderer();
+  std::shared_ptr<std::string> GetOpenGLVersion();
 };
 } // namespace sask
