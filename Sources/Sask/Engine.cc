@@ -66,7 +66,7 @@ void Engine::Run(Application *app)
     throw std::runtime_error("window must be not null!");
   }
 
-  while (!app->window->shouldClose)
+  while (!app->window->ShouldClose())
   {
     app->Update();
     app->window->UpdateViewport();

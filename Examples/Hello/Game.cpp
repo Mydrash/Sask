@@ -41,7 +41,7 @@ class Game : public sask::Application
   {
     if (window->IsKeyDown(Escape))
     {
-      window->shouldClose = true;
+      window->Close();
     }
 
     if (window->IsKeyDown(Space))

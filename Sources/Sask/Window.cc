@@ -2,6 +2,8 @@
 #include <memory>
 #include <string>
 
+#include "GLFW/glfw3.h"
+
 using sask::Window;
 
 void Window::MakeCurrent()
@@ -25,6 +27,16 @@ void Window::UpdateViewport()
 bool Window::IsKeyDown(int key)
 {
   return glfwGetKey(this->wrappedWindow.window, key) == GLFW_PRESS;
+}
+
+bool Window::ShouldClose()
+{
+  return glfwWindowShouldClose(this->wrappedWindow.window);
+}
+
+void Window::Close()
+{
+  glfwSetWindowShouldClose(this->wrappedWindow.window, true);
 }
 
 std::shared_ptr<std::string> Window::GetOpenGLVersion()

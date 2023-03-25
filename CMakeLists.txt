@@ -21,7 +21,6 @@ if (NOT glfw3_FOUND)
     FetchContent_Populate(glfw3)
     add_subdirectory(${glfw3_SOURCE_DIR} ${glfw3_BINARY_DIR})
   endif()
-
 endif() 
 
 project (Sask)

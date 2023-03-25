@@ -13,8 +13,6 @@ namespace sask
     core::graphics::Window wrappedWindow;
 
    public:
-    bool shouldClose = false;
-
     Window(std::string_view title, uint32_t width, uint32_t height)
         : wrappedWindow(title, width, height)
     {
@@ -24,6 +22,8 @@ namespace sask
     void MakeCurrent();
     void Flush();
     void UpdateViewport();
+    void Close();
+    bool ShouldClose();
     bool IsKeyDown(int key);
 
     std::shared_ptr<std::string> GetRenderer();
