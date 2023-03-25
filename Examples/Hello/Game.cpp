@@ -1,7 +1,6 @@
 #include <Sask/Engine.hpp>
 #include <Sask/Utils/Shader.hpp>
 #include <iostream>
-#include <unistd.h>
 
 class Game : public sask::Application {
   float red = 0.0f;

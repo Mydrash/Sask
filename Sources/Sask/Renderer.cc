@@ -1,4 +1,3 @@
-
 #include <Core/Utils/GL.hpp>
 #include <GL/gl.h>
 #include <Sask/Renderer.hpp>
