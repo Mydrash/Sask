@@ -26,8 +26,6 @@ Engine::Engine()
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwSetErrorCallback(GLFWErrorHandler);
-  glEnable(GL_DEPTH_TEST);
-  glDepthFunc(GL_LESS);
 }
 
 Engine::~Engine()
@@ -41,14 +39,14 @@ Window *Engine::CreateWindow(const std::string_view title, const uint32_t width,
   auto window = new Window(title, width, height);
   window->MakeCurrent();
 
-  GLenum glewStatus = glewInit();
-  if (glewStatus != GLEW_OK)
+  int version = gladLoadGL(glfwGetProcAddress);
+  if (version == 0)
   {
-    throw std::runtime_error(
-        "unable to initialize glew: " +
-        (std::string((char *)glewGetErrorString(glewStatus))));
+    throw std::runtime_error("Unable to initialize OpenGL Context");
   }
 
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LESS);
   return window;
 }
 
@@ -60,7 +58,6 @@ void Engine::PollEvents()
 void Engine::Run(Application *app)
 {
   app->shaders = glCreateProgram();
-
   app->Setup();
   glLinkProgram(app->shaders);
 
