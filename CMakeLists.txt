@@ -16,7 +16,7 @@ if (NOT glfw3_FOUND)
   )
   FetchContent_GetProperties(raylib)
 
-   if (NOT raylib_POPULATED)
+   if (NOT glfw3_POPULATED)
     set(FETCHCONTENT_QUIET NO)
     FetchContent_Populate(glfw3)
     add_subdirectory(${glfw3_SOURCE_DIR} ${glfw3_BINARY_DIR})
@@ -48,11 +48,10 @@ set_target_properties(Sask PROPERTIES CXX_STANDARD 20)
 target_compile_options(Sask PRIVATE -g -Wall)
 target_link_libraries(Sask PRIVATE glfw)
 target_link_libraries(Sask PRIVATE glad)
-
-target_include_directories(Sask PRIVATE ${GLFW3_INCLUDE_DIRS})
-
-target_include_directories(Sask PUBLIC Include)
+target_compile_definitions(Sask PRIVATE BUILDING_LIB)
 target_include_directories(Sask PUBLIC External)
+target_include_directories(Sask PUBLIC Include)
+target_include_directories(Sask PUBLIC ${GLFW3_INCLUDE_DIRS})
 
 add_subdirectory(External/glad)
 add_subdirectory(Examples/Hello)
