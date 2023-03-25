@@ -12,7 +12,7 @@ namespace sask
 
     virtual void Setup() = 0;
 
-    virtual void Update() = 0;
+    virtual void Update(){};
 
     virtual void Render(sask::Renderer render) = 0;
   };

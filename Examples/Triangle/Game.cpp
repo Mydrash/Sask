@@ -4,7 +4,6 @@
 
 class Game : public sask::Application
 {
-  float red = 0.0f;
   std::shared_ptr<sask::Shader> vertexShader;
   std::shared_ptr<sask::Shader> fragmentShader;
   sask::VertexArray* triangle = nullptr;
@@ -16,9 +15,8 @@ class Game : public sask::Application
     using namespace sask::utils;
     std::cout << "GL Renderer: " << *window->GetRenderer() << "\n";
     std::cout << "GL Version: " << *window->GetOpenGLVersion() << "\n";
-    std::cout << "Keep pressing <Space> to change color.\n";
 
-    std::cout << "Uploading data onto GPU ... ";
+    std::cout << "Compiling shaders ... ";
     this->triangle = new sask::VertexArray({ 0.0f, 0.5f, 0.0f,   //
                                              0.5f, -0.5f, 0.0f,  //
                                              -0.5f, -0.5f, 0.0f },
@@ -35,25 +33,12 @@ class Game : public sask::Application
     fragmentShader->Attach(&this->shaders);
     vertexShader->Attach(&this->shaders);
     shaders.Attach();
-    std::cout << " <Finished> \n";
-  }
 
-  void Update()
-  {
-    if (window->IsKeyDown(Escape))
-    {
-      window->Close();
-    }
-
-    if (window->IsKeyDown(Space))
-    {
-      this->red += 1.0f;
-    }
+    std::cout << ": Done.\n";
   }
 
   void Render(sask::Renderer R)
   {
-    R.ClearColor(red, 0xF, 0xF, 0xFF);
     shaders.Bind();
     triangle->Bind();
 
@@ -64,7 +49,7 @@ class Game : public sask::Application
 int main(void)
 {
   sask::Engine engine;
-  auto window = engine.CreateWindow("Hello", 800, 600);
+  auto window = engine.CreateWindow("Triangle", 800, 600);
   auto game = new Game();
 
   game->window = window;

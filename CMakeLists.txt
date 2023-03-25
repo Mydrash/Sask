@@ -54,4 +54,4 @@ target_include_directories(Sask PUBLIC Include)
 target_include_directories(Sask PUBLIC ${GLFW3_INCLUDE_DIRS})
 
 add_subdirectory(External/glad)
-add_subdirectory(Examples/Hello)
+add_subdirectory(Examples/Triangle)
