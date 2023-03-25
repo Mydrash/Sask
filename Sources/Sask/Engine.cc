@@ -7,11 +7,20 @@
 using sask::Engine;
 using sask::Window;
 
+void GLFWErrorHandler(int error, const char *description) {
+  fprintf(stderr, "GLFW Error: %s\n", description);
+}
+
 Engine::Engine() {
   if (!glfwInit()) {
     glfwTerminate();
     throw new std::runtime_error("Failed to initialize glfw!");
   }
+
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwSetErrorCallback(GLFWErrorHandler);
 }
 
 Engine::~Engine() { glfwTerminate(); }

@@ -14,6 +14,8 @@ public:
   ~Window();
 
   void MakeCurrent();
+  void Flush();
+  void UpdateViewport();
   bool ShouldClose();
 };
 } // namespace sask

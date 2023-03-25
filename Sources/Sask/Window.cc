@@ -7,6 +7,15 @@ void Window::MakeCurrent() {
   glfwMakeContextCurrent(this->wrappedWindow.window);
 }
 
+void Window::Flush() { glfwSwapBuffers(this->wrappedWindow.window); }
+
+void Window::UpdateViewport() {
+  int width, height;
+  glfwGetFramebufferSize(this->wrappedWindow.window, &width, &height);
+  glViewport(0, 0, width, height);
+  glClear(GL_COLOR_BUFFER_BIT);
+}
+
 bool Window::ShouldClose() {
   return glfwWindowShouldClose(this->wrappedWindow.window);
 }
