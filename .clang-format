@@ -1,0 +1,15 @@
+Language: Cpp
+Standard: c++20
+BasedOnStyle: Google
+AlignConsecutiveBitFields:
+  Enabled: true
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: Empty
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBraces: Allman
+BreakInheritanceList: AfterColon
+BreakStringLiterals: true
+Cpp11BracedListStyle: false
+IncludeBlocks: Regroup
+IndentWidth: 2
+NamespaceIndentation: All

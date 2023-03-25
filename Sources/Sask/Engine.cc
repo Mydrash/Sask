@@ -1,6 +1,5 @@
 #include <Core/Graphics/OpenGL.hpp>
 #include <Core/Graphics/Window.hpp>
-
 #include <Sask/Application.hpp>
 #include <Sask/Engine.hpp>
 #include <Sask/Window.hpp>
@@ -10,12 +9,15 @@
 using sask::Engine;
 using sask::Window;
 
-void GLFWErrorHandler(int error, const char *description) {
+void GLFWErrorHandler(int error, const char *description)
+{
   fprintf(stderr, "GLFW Error: %s\n", description);
 }
 
-Engine::Engine() {
-  if (!glfwInit()) {
+Engine::Engine()
+{
+  if (!glfwInit())
+  {
     glfwTerminate();
     throw new std::runtime_error("Failed to initialize glfw!");
   }
@@ -28,15 +30,20 @@ Engine::Engine() {
   glDepthFunc(GL_LESS);
 }
 
-Engine::~Engine() { glfwTerminate(); }
+Engine::~Engine()
+{
+  glfwTerminate();
+}
 
 Window *Engine::CreateWindow(const std::string_view title, const uint32_t width,
-                             const uint32_t height) {
+                             const uint32_t height)
+{
   auto window = new Window(title, width, height);
   window->MakeCurrent();
 
   GLenum glewStatus = glewInit();
-  if (glewStatus != GLEW_OK) {
+  if (glewStatus != GLEW_OK)
+  {
     throw std::runtime_error(
         "unable to initialize glew: " +
         (std::string((char *)glewGetErrorString(glewStatus))));
@@ -45,19 +52,25 @@ Window *Engine::CreateWindow(const std::string_view title, const uint32_t width,
   return window;
 }
 
-void Engine::PollEvents() { glfwPollEvents(); }
+void Engine::PollEvents()
+{
+  glfwPollEvents();
+}
 
-void Engine::Run(Application *app) {
+void Engine::Run(Application *app)
+{
   app->shaders = glCreateProgram();
 
   app->Setup();
   glLinkProgram(app->shaders);
 
-  if (app->window == nullptr) {
+  if (app->window == nullptr)
+  {
     throw std::runtime_error("window must be not null!");
   }
 
-  while (!app->window->shouldClose) {
+  while (!app->window->shouldClose)
+  {
     app->Update();
     app->window->UpdateViewport();
 

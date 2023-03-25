@@ -5,24 +5,28 @@
 #include <memory>
 #include <string_view>
 
-namespace sask {
-class Window {
-private:
-  core::graphics::Window wrappedWindow;
+namespace sask
+{
+  class Window
+  {
+   private:
+    core::graphics::Window wrappedWindow;
 
-public:
-  bool shouldClose = false;
+   public:
+    bool shouldClose = false;
 
-  Window(std::string_view title, uint32_t width, uint32_t height)
-      : wrappedWindow(title, width, height) {}
-  ~Window();
+    Window(std::string_view title, uint32_t width, uint32_t height)
+        : wrappedWindow(title, width, height)
+    {
+    }
+    ~Window();
 
-  void MakeCurrent();
-  void Flush();
-  void UpdateViewport();
-  bool IsKeyDown(int key);
+    void MakeCurrent();
+    void Flush();
+    void UpdateViewport();
+    bool IsKeyDown(int key);
 
-  std::shared_ptr<std::string> GetRenderer();
-  std::shared_ptr<std::string> GetOpenGLVersion();
-};
-} // namespace sask
+    std::shared_ptr<std::string> GetRenderer();
+    std::shared_ptr<std::string> GetOpenGLVersion();
+  };
+}  // namespace sask

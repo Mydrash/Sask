@@ -2,7 +2,8 @@
 #include <iostream>
 using sask::Shader;
 
-Shader::Shader(std::string content, ShaderKind kind) {
+Shader::Shader(std::string content, ShaderKind kind)
+{
   this->id = glCreateShader(kind);
 
   const char *glShader = content.c_str();
@@ -10,6 +11,7 @@ Shader::Shader(std::string content, ShaderKind kind) {
   glCompileShader(id);
 }
 
-void Shader::Attach(unsigned int programme) {
+void Shader::Attach(unsigned int programme)
+{
   glAttachShader(programme, this->id);
 }

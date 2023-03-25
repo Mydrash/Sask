@@ -10,16 +10,19 @@
 #include <string>
 #include <string_view>
 
-namespace sask {
-class Engine {
-public:
-  Engine();
-  ~Engine();
-  sask::Renderer Renderer;
+namespace sask
+{
+  class Engine
+  {
+   public:
+    Engine();
+    ~Engine();
+    sask::Renderer Renderer;
 
-  Window *CreateWindow(std::string_view title, uint32_t width, uint32_t height);
-  void PollEvents();
+    Window *CreateWindow(std::string_view title, uint32_t width,
+                         uint32_t height);
+    void PollEvents();
 
-  void Run(Application *app);
-};
-} // namespace sask
+    void Run(Application *app);
+  };
+}  // namespace sask

@@ -10,17 +10,20 @@
 using namespace sask::utils;
 
 std::shared_ptr<sask::Shader> shader::LoadFromFile(std::string filePath,
-                                                   sask::ShaderKind kind) {
+                                                   sask::ShaderKind kind)
+{
   std::ifstream source(filePath);
 
-  if (source.fail()) {
+  if (source.fail())
+  {
     throw std::ios_base::failure(filePath + ": " + std::strerror(errno));
   }
 
   std::string line;
   std::stringstream content;
 
-  while (getline(source, line)) {
+  while (getline(source, line))
+  {
     content << line << "\n";
   }
 
