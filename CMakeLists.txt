@@ -30,8 +30,9 @@ add_library(Sask
           "Sources/Sask/Window.cc"
           "Sources/Sask/Renderer.cc"
           "Sources/Sask/Shader.cc"
-          "Sources/Sask/VertexArray.cc"
+          "Sources/Sask/ShaderContainer.cc"
 
+          "Sources/Sask/VertexArray.cc"
           "Sources/Sask/Utils/Shader.cc"
 
           "Sources/Core/Graphics/Window.cc"

@@ -57,9 +57,7 @@ void Engine::PollEvents()
 
 void Engine::Run(Application *app)
 {
-  app->shaders = glCreateProgram();
   app->Setup();
-  glLinkProgram(app->shaders);
 
   if (app->window == nullptr)
   {
@@ -71,7 +69,6 @@ void Engine::Run(Application *app)
     app->Update();
     app->window->UpdateViewport();
 
-    glUseProgram(app->shaders);
     app->Render(this->Renderer);
 
     app->window->Flush();

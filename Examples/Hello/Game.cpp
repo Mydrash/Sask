@@ -7,13 +7,13 @@ class Game : public sask::Application
   float red = 0.0f;
   std::shared_ptr<sask::Shader> vertexShader;
   std::shared_ptr<sask::Shader> fragmentShader;
-  sask::VertexArray *triangle = nullptr;
+  sask::VertexArray* triangle = nullptr;
+  sask::ShaderContainer shaders;
 
  public:
   void Setup()
   {
     using namespace sask::utils;
-
     std::cout << "GL Renderer: " << *window->GetRenderer() << "\n";
     std::cout << "GL Version: " << *window->GetOpenGLVersion() << "\n";
     std::cout << "Keep pressing <Space> to change color.\n";
@@ -32,8 +32,9 @@ class Game : public sask::Application
     this->fragmentShader =
         shader::LoadFromFile("./FragmentShader.glsl", sask::FragmentShader);
 
-    fragmentShader->Attach(this->shaders);
-    vertexShader->Attach(this->shaders);
+    fragmentShader->Attach(&this->shaders);
+    vertexShader->Attach(&this->shaders);
+    shaders.Attach();
     std::cout << " <Finished> \n";
   }
 
@@ -53,6 +54,7 @@ class Game : public sask::Application
   void Render(sask::Renderer R)
   {
     R.ClearColor(red, 0xF, 0xF, 0xFF);
+    shaders.Bind();
     triangle->Bind();
 
     glDrawArrays(GL_TRIANGLES, 0, 3);

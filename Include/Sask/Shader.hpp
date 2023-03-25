@@ -1,5 +1,6 @@
 #pragma once
 #include <Core/Graphics/OpenGL.hpp>
+#include <Sask/ShaderContainer.hpp>
 #include <string>
 
 namespace sask
@@ -16,7 +17,7 @@ namespace sask
 
    public:
     Shader(std::string content, ShaderKind kind);
-    void Attach(unsigned int programme);
+    void Attach(sask::ShaderContainer* container);
   };
 
 }  // namespace sask

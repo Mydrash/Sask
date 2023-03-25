@@ -9,7 +9,6 @@ namespace sask
   {
    public:
     Window *window;
-    unsigned int shaders;
 
     virtual void Setup() = 0;
 
