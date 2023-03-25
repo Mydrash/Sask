@@ -2,7 +2,9 @@
 
 #include <Core/Graphics/Window.hpp>
 #include <cstdint>
+#include <memory>
 #include <string_view>
+
 namespace sask {
 class Window {
 private:
@@ -19,5 +21,8 @@ public:
   void Flush();
   void UpdateViewport();
   bool IsKeyDown(int key);
+
+  std::unique_ptr<std::string> GetRenderer();
+  std::unique_ptr<std::string> GetOpenGLVersion();
 };
 } // namespace sask

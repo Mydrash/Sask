@@ -31,12 +31,14 @@ Window *Engine::CreateWindow(const std::string_view title, const uint32_t width,
                              const uint32_t height) {
   auto window = new Window(title, width, height);
   window->MakeCurrent();
+
   return window;
 }
 
 void Engine::PollEvents() { glfwPollEvents(); }
 
 void Engine::Run(Application *app) {
+  app->Setup();
   if (app->window == nullptr) {
     throw std::runtime_error("window must be not null!");
   }

@@ -1,7 +1,13 @@
 #include <Sask/Engine.hpp>
+#include <iostream>
 
 class Game : public sask::Application {
 public:
+  void Setup() {
+    std::cout << "GL Renderer: " << *window->GetRenderer() << "\n";
+    std::cout << "GL Version: " << *window->GetOpenGLVersion() << "\n";
+  }
+
   void Update() {
     if (window->IsKeyDown(Escape)) {
       window->shouldClose = true;
