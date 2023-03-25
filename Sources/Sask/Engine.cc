@@ -52,6 +52,7 @@ Window *Engine::CreateWindow(const std::string_view title, const uint32_t width,
 
 void Engine::PollEvents()
 {
+  glfwWaitEvents();
   glfwPollEvents();
 }
 
