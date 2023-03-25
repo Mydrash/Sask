@@ -1,7 +1,9 @@
 #include "Core/Graphics/Window.hpp"
+#include "Sask/Application.hpp"
 #include "Sask/Window.hpp"
 #include <GLFW/glfw3.h>
 #include <Sask/Engine.hpp>
+#include <cstddef>
 #include <stdexcept>
 
 using sask::Engine;
@@ -27,7 +29,25 @@ Engine::~Engine() { glfwTerminate(); }
 
 Window *Engine::CreateWindow(const std::string_view title, const uint32_t width,
                              const uint32_t height) {
-  return new Window(title, width, height);
+  auto window = new Window(title, width, height);
+  window->MakeCurrent();
+  return window;
 }
 
 void Engine::PollEvents() { glfwPollEvents(); }
+
+void Engine::Run(Application *app) {
+  if (app->window == nullptr) {
+    throw std::runtime_error("window must be not null!");
+  }
+
+  while (!app->window->shouldClose) {
+    app->Update();
+    app->window->UpdateViewport();
+
+    app->Render(this->Renderer);
+
+    app->window->Flush();
+    this->PollEvents();
+  }
+}

@@ -16,6 +16,6 @@ void Window::UpdateViewport() {
   glClear(GL_COLOR_BUFFER_BIT);
 }
 
-bool Window::ShouldClose() {
-  return glfwWindowShouldClose(this->wrappedWindow.window);
+bool Window::IsKeyDown(int key) {
+  return glfwGetKey(this->wrappedWindow.window, key) == GLFW_PRESS;
 }
