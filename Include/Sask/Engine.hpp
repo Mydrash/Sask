@@ -1,7 +1,9 @@
 #pragma once
 #include <Sask/Application.hpp>
+#include <Sask/Engine.hpp>
 #include <Sask/Keys.hpp>
 #include <Sask/Renderer.hpp>
+#include <Sask/VertexArray.hpp>
 #include <Sask/Window.hpp>
 #include <cstdint>
 #include <functional>

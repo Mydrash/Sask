@@ -1,5 +1,6 @@
+#include <Core/Graphics/OpenGL.hpp>
 #include <Core/Graphics/Window.hpp>
-#include <GLFW/glfw3.h>
+
 #include <Sask/Application.hpp>
 #include <Sask/Engine.hpp>
 #include <Sask/Window.hpp>
@@ -34,13 +35,24 @@ Window *Engine::CreateWindow(const std::string_view title, const uint32_t width,
   auto window = new Window(title, width, height);
   window->MakeCurrent();
 
+  GLenum glewStatus = glewInit();
+  if (glewStatus != GLEW_OK) {
+    throw std::runtime_error(
+        "unable to initialize glew: " +
+        (std::string((char *)glewGetErrorString(glewStatus))));
+  }
+
   return window;
 }
 
 void Engine::PollEvents() { glfwPollEvents(); }
 
 void Engine::Run(Application *app) {
+  app->shaders = glCreateProgram();
+
   app->Setup();
+  glLinkProgram(app->shaders);
+
   if (app->window == nullptr) {
     throw std::runtime_error("window must be not null!");
   }
@@ -49,6 +61,7 @@ void Engine::Run(Application *app) {
     app->Update();
     app->window->UpdateViewport();
 
+    glUseProgram(app->shaders);
     app->Render(this->Renderer);
 
     app->window->Flush();

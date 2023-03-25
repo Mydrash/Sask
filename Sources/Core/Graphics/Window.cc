@@ -1,5 +1,4 @@
 #include <Core/Graphics/Window.hpp>
-#include <GLFW/glfw3.h>
 #include <cstdint>
 #include <stdexcept>
 #include <string_view>
@@ -11,7 +10,6 @@ Window::Window(const std::string_view title, const uint32_t width,
   this->window = glfwCreateWindow(width, height, title.data(), 0, 0);
 
   if (this->window == nullptr) {
-
     throw std::runtime_error("unable to create glfw window!");
   }
 }

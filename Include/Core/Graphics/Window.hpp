@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
+#include <Core/Graphics/OpenGL.hpp>
 #include <cstdint>
 #include <numbers>
 #include <string_view>

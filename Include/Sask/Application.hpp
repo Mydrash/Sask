@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Sask/Window.hpp"
 #include <Sask/Renderer.hpp>
+#include <Sask/Window.hpp>
 
 namespace sask {
 class Application {
 public:
   Window *window;
+  unsigned int shaders;
 
   virtual void Setup() = 0;
 

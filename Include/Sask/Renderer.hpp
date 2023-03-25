@@ -1,5 +1,6 @@
 #pragma once
 #include <Core/Utils/Alias.hpp>
+#include <Sask/VertexArray.hpp>
 
 namespace sask {
 class Renderer {
