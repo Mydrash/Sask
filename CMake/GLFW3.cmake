@@ -1,0 +1,20 @@
+set (GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set (GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set (GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+find_package(glfw3 ${GLFW_VERSION} QUIET)
+
+if (NOT glfw3_FOUND)
+  include(FetchContent)
+  FetchContent_Declare(
+    glfw3
+    URL https://github.com/glfw/glfw/releases/download/${GLFW_VERSION}/glfw-${GLFW_VERSION}.zip
+  )
+  FetchContent_GetProperties(glfw3)
+
+   if (NOT glfw3_POPULATED)
+    set(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(glfw3)
+    add_subdirectory(${GLFW_SOURCE_DIR} ${GLFW_BINARY_DIR})
+  endif()
+endif() 

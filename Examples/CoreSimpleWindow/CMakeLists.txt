@@ -1,0 +1,3 @@
+add_executable(CoreSimpleWindow Window.cc)
+target_link_libraries(CoreSimpleWindow SaskCore)
+target_link_libraries(CoreSimpleWindow spdlog)

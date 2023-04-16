@@ -1,3 +1,6 @@
 {
   "cmake.buildDirectory": "${workspaceFolder}/Build",
+  "[cpp]": {
+    "editor.tabSize": 2
+  }
 }
