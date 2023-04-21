@@ -1,4 +1,4 @@
-add_library(SaskCore SHARED
+add_library(SaskCore 
   "Sources/Sask/Core/Window.cc"
   "Include/Sask/Core/Window.hpp")
 
