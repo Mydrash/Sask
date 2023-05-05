@@ -9,7 +9,7 @@ enum driver_result
 
 enum driver_event_type
 {
-  DRIVER_EVENT_QUIT_REQUESTED,
+  DRIVER_EVENT_QUIT_REQUESTED = 1,
   DRIVER_EVENT_KEYCHANGED
 };
 
@@ -19,11 +19,15 @@ struct driver_event_key
   bool pressed;
 };
 
-union driver_event
+union driver_event_payload
+{
+  struct driver_event_key key;
+};
+
+struct driver_event
 {
   enum driver_event_type type;
-
-  struct driver_event_key key;
+  union driver_event_payload data;
 };
 
 typedef union
@@ -116,7 +120,7 @@ enum driver_result driver_render_buffer(void *renderer, device_framebuffer_t *bu
 /**
  * Polls a event
  */
-union driver_event driver_poll_event(void);
+struct driver_event driver_poll_event(void);
 
 /**
  * Sleep current thread by ms miliseconds.

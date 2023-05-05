@@ -56,23 +56,26 @@ enum driver_result driver_render_buffer(void *renderer, device_framebuffer_t *fb
   return SDL2DRV(SDL_RenderCopy(renderer, fb->referer, NULL, NULL));
 }
 
-union driver_event driver_poll_event(void)
+struct driver_event driver_poll_event(void)
 {
   SDL_Event sdl_event;
   SDL_PollEvent(&sdl_event);
-  union driver_event event;
+  struct driver_event event = {0};
 
   switch (sdl_event.type)
   {
   case SDL_KEYDOWN:
+    event.data.key.code = sdl_event.key.keysym.sym;
+    event.data.key.pressed = true;
     event.type = DRIVER_EVENT_KEYCHANGED;
-    event.key.code = sdl_event.key.keysym.sym;
-    event.key.pressed = true;
+    break;
 
   case SDL_KEYUP:
+    event.data.key.code = sdl_event.key.keysym.sym;
+    event.data.key.pressed = false;
     event.type = DRIVER_EVENT_KEYCHANGED;
-    event.key.code = sdl_event.key.keysym.sym;
-    event.key.pressed = false;
+    break;
+
 
   case SDL_QUIT:
     event.type = DRIVER_EVENT_QUIT_REQUESTED;
@@ -81,6 +84,7 @@ union driver_event driver_poll_event(void)
 
   return event;
 }
+
 void driver_destroy_buffer(device_framebuffer_t *fb)
 {
   SDL_DestroyTexture(fb->referer);
