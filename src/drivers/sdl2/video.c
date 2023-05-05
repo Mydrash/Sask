@@ -10,19 +10,15 @@ enum driver_result driver_init()
   return SDL2DRV(SDL_Init(SDL_INIT_VIDEO));
 }
 
-void driver_quit() { SDL_Quit(); }
-
 const char *driver_error(void) { return SDL_GetError(); }
 
-void *driver_create_window(const char *title, u32 x, u32 y, u32 width,
+void *driver_window_create(const char *title, u32 x, u32 y, u32 width,
                            u32 height)
 {
   return SDL_CreateWindow(title, x, y, width, height, SDL_WINDOW_SHOWN);
 }
 
-void driver_destroy_window(void *window) { SDL_DestroyWindow(window); }
-
-void *driver_create_renderer(void *window)
+void *driver_renderer_create(void *window)
 {
   return SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
@@ -42,18 +38,66 @@ void driver_render_present(void *renderer)
   SDL_RenderPresent(renderer);
 }
 
-enum driver_result driver_render_rect(void *renderer, u32 x, u32 y, u32 width, u32 height)
+device_framebuffer_t driver_render_create_buffer(void *renderer, u32 width, u32 height)
 {
-  SDL_Rect rect = {x, y, width, height};
-  return SDL2DRV(SDL_RenderDrawRect(renderer, &rect));
+  device_framebuffer_t fb = {width, height, width * sizeof(color_t)};
+  fb.pixels = calloc(sizeof(color_t), width * height);
+  fb.referer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+  return fb;
 }
 
-void driver_render_set_color(void *renderer, color_t color)
+enum driver_result driver_render_buffer(void *renderer, device_framebuffer_t *fb)
 {
-  SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+  if (!(SDL2DRV(SDL_UpdateTexture(fb->referer, NULL, fb->pixels, fb->pitch))))
+  {
+    return DRIVER_FAIL;
+  }
+
+  return SDL2DRV(SDL_RenderCopy(renderer, fb->referer, NULL, NULL));
+}
+
+union driver_event driver_poll_event(void)
+{
+  SDL_Event sdl_event;
+  SDL_PollEvent(&sdl_event);
+  union driver_event event;
+
+  switch (sdl_event.type)
+  {
+  case SDL_KEYDOWN:
+    event.type = DRIVER_EVENT_KEYCHANGED;
+    event.key.code = sdl_event.key.keysym.sym;
+    event.key.pressed = true;
+
+  case SDL_KEYUP:
+    event.type = DRIVER_EVENT_KEYCHANGED;
+    event.key.code = sdl_event.key.keysym.sym;
+    event.key.pressed = false;
+
+  case SDL_QUIT:
+    event.type = DRIVER_EVENT_QUIT_REQUESTED;
+    break;
+  }
+
+  return event;
+}
+void driver_destroy_buffer(device_framebuffer_t *fb)
+{
+  SDL_DestroyTexture(fb->referer);
+  free(fb->pixels);
+}
+
+void driver_destroy_window(void *window)
+{
+  SDL_DestroyWindow(window);
 }
 
 void driver_delay(u32 ms)
 {
   SDL_Delay(ms);
+}
+
+void driver_quit()
+{
+  SDL_Quit();
 }
