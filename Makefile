@@ -40,7 +40,7 @@ endif
 
 ifeq ($(DRIVER),SDL2)
 	SDL2 		= $(shell pkg-config --cflags --libs sdl2)
-	SRC 		+= src/drivers/sdl2/init.c
+	SRC 		+= src/drivers/sdl2/video.c
 	LDFLAGS 	+= $(SDL2)
 endif
 
