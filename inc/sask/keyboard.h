@@ -1,5 +1,5 @@
 #ifndef _sask_kb
-enum key_code
+typedef enum sask_key
 {
   KEY_RETURN = '\r',
   KEY_ESCAPE = '\x1B',
@@ -75,7 +75,7 @@ enum key_code
   KEY_x = 'x',
   KEY_y = 'y',
   KEY_z = 'z',
-};
+} sask_key_e;
 
 #define _sask_kb
 #endif

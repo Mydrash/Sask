@@ -11,18 +11,21 @@ typedef enum sask_result
 
 typedef struct sask_app
 {
-  u8 id;
-
   void *h_window, *h_render;
   driver_buffer_t buffer;
+
+  bool should_quit;
+  char key_state[32];
 } sask_app_t;
 
 sask_result_e sask_init(void);
 void sask_destroy(void);
 
+bool sask_keyboard_pressed(sask_app_t *app, u32 key);
 sask_result_e sask_app_create(sask_app_t *app, void *title, u32 x, u32 y,
                               u32 width, u32 height);
 void sask_app_destroy(sask_app_t *app);
+void sask_app_next(sask_app_t *app);
 
 const char *sask_error(void);
 
