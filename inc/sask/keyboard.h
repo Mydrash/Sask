@@ -75,7 +75,7 @@ typedef enum sask_key
   KEY_x = 'x',
   KEY_y = 'y',
   KEY_z = 'z',
-} sask_key_e;
+} sask_key_m;
 
 #define _sask_kb
 #endif

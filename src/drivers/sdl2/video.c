@@ -1,7 +1,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_video.h>
-#include <sask/driver.h>
+
+#include "sask/driver.h"
 
 #define SDL2DRV(expr) (!(expr) ? DRIVER_OK : DRIVER_FAIL)
 
@@ -45,8 +46,8 @@ driver_buffer_t driver_render_create_buffer(void *renderer, u32 width,
                                             u32 height)
 {
   driver_buffer_t fb = {width, height};
-  fb.pixels = calloc(sizeof(color_t), width * height);
-  fb.pitch = sizeof(color_t) * width;
+  fb.pixels = (color_m *)calloc(sizeof(color_m), width * height);
+  fb.pitch = sizeof(color_m) * width;
   fb.referer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
                                  SDL_TEXTUREACCESS_STREAMING, width, height);
   return fb;

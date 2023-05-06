@@ -1,7 +1,7 @@
 CC        ?= gcc
 OUT        = out
 DRIVER     = SDL2
-CFLAGS     = -Wall -Iinc -D VERSION=$(VERSION)
+CFLAGS     = -Wall -Iinc -D VERSION=$(VERSION) -std=c89
 SRC        = src/engine.c src/app.c src/draw.c
 OBJS 	     = $(SRC:%.c=%.o)
 LDFLAGS    =

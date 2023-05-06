@@ -9,7 +9,7 @@
 int main(void)
 {
   sask_app_t app;
-  color_t RED = {.r = 0xFF, .g = 0x00, .b = 0x00, .a = 0xFF};
+  color_m RED = {.red = 0xFF, .green = 0x00, .blue = 0x00, .alpha = 0xFF};
   u32 x = 0, y = 0;
 
   if (sask_init() != SASK_OK)
@@ -43,11 +43,7 @@ int main(void)
       y = 0;
     }
 
-    printf("%d, %d\n", x, y);
-    if (app.should_quit)
-    {
-      goto exit;
-    }
+    if (app.should_quit) goto exit;
 
     sask_draw_filled_rect(&app, x, y, 200, 200, RED);
 

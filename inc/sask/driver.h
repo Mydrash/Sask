@@ -30,22 +30,23 @@ struct driver_event
   union driver_event_payload data;
 };
 
+/* A ARGB Color */
 typedef union
 {
   u32 value;
   struct
   {
-    u8 b;
-    u8 g;
-    u8 r;
-    u8 a;
+    u8 blue;
+    u8 green;
+    u8 red;
+    u8 alpha;
   };
-} color_t;
+} color_m;
 
 typedef struct
 {
   u32 width, height, pitch;
-  color_t *pixels;
+  color_m *pixels;
   void *referer;
 } driver_buffer_t;
 

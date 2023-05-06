@@ -1,9 +1,11 @@
-#include <sask/driver.h>
-#include <sask/engine.h>
+#include "sask/engine.h"
+
 #include <stddef.h>
 #include <stdlib.h>
 
-sask_result_e sask_init(void)
+#include "sask/driver.h"
+
+sask_result_m sask_init(void)
 {
   if (!driver_init())
   {
@@ -13,14 +15,15 @@ sask_result_e sask_init(void)
   return SASK_OK;
 }
 
-sask_result_e sask_app_create(sask_app_t *app, void *title, u32 x, u32 y,
+sask_result_m sask_app_create(sask_app_t *app, void *title, u32 x, u32 y,
                               u32 width, u32 height)
 {
+  size_t idx;
   app->h_window = driver_window_create(title, x, y, width, height);
   app->should_quit = false;
 
-  for (size_t idx = 0;
-       idx < (sizeof(app->key_state) / sizeof(app->key_state[0])); ++idx)
+  for (idx = 0; idx < (sizeof(app->key_state) / sizeof(app->key_state[0]));
+       ++idx)
   {
     app->key_state[idx] = 0;
   }
