@@ -9,7 +9,6 @@ VERSION    = 0.1.0_fly
 PROFILE    = Debug
 BUILD_TYPE = dynamic
 
-
 ifndef PLATFORM 
 	ifeq ($(OS),Windows_NT)
 		PLATFORM ?= Windows

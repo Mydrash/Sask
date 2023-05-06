@@ -10,7 +10,10 @@ enum driver_result driver_init()
   return SDL2DRV(SDL_Init(SDL_INIT_VIDEO));
 }
 
-const char *driver_error(void) { return SDL_GetError(); }
+const char *driver_error(void)
+{
+  return SDL_GetError();
+}
 
 void *driver_window_create(const char *title, u32 x, u32 y, u32 width,
                            u32 height)
@@ -38,15 +41,18 @@ void driver_render_present(void *renderer)
   SDL_RenderPresent(renderer);
 }
 
-device_framebuffer_t driver_render_create_buffer(void *renderer, u32 width, u32 height)
+device_framebuffer_t driver_render_create_buffer(void *renderer, u32 width,
+                                                 u32 height)
 {
   device_framebuffer_t fb = {width, height, width * sizeof(color_t)};
   fb.pixels = calloc(sizeof(color_t), width * height);
-  fb.referer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+  fb.referer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
+                                 SDL_TEXTUREACCESS_STREAMING, width, height);
   return fb;
 }
 
-enum driver_result driver_render_buffer(void *renderer, device_framebuffer_t *fb)
+enum driver_result driver_render_buffer(void *renderer,
+                                        device_framebuffer_t *fb)
 {
   if (!(SDL2DRV(SDL_UpdateTexture(fb->referer, NULL, fb->pixels, fb->pitch))))
   {
@@ -64,22 +70,21 @@ struct driver_event driver_poll_event(void)
 
   switch (sdl_event.type)
   {
-  case SDL_KEYDOWN:
-    event.data.key.code = sdl_event.key.keysym.sym;
-    event.data.key.pressed = true;
-    event.type = DRIVER_EVENT_KEYCHANGED;
-    break;
+    case SDL_KEYDOWN:
+      event.data.key.code = sdl_event.key.keysym.sym;
+      event.data.key.pressed = true;
+      event.type = DRIVER_EVENT_KEYCHANGED;
+      break;
 
-  case SDL_KEYUP:
-    event.data.key.code = sdl_event.key.keysym.sym;
-    event.data.key.pressed = false;
-    event.type = DRIVER_EVENT_KEYCHANGED;
-    break;
+    case SDL_KEYUP:
+      event.data.key.code = sdl_event.key.keysym.sym;
+      event.data.key.pressed = false;
+      event.type = DRIVER_EVENT_KEYCHANGED;
+      break;
 
-
-  case SDL_QUIT:
-    event.type = DRIVER_EVENT_QUIT_REQUESTED;
-    break;
+    case SDL_QUIT:
+      event.type = DRIVER_EVENT_QUIT_REQUESTED;
+      break;
   }
 
   return event;

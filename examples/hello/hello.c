@@ -41,27 +41,28 @@ loop:
 
   switch (ev.type)
   {
-  case DRIVER_EVENT_QUIT_REQUESTED:
-    puts("quitting!");
-    goto exit;
-  case DRIVER_EVENT_KEYCHANGED:
-    switch (ev.data.key.code)
-    {
-    case KEY_a:
-      ++bg.g;
-      break;
-   
-    case KEY_d:
-      ++bg.b;
-      break;
-
-    case KEY_p:
-        printf("0x%X: (r: %d, g: %d, b: %d)\n", bg.value, bg.r, bg.g, bg.b);
-        break;
-        
-    case KEY_ESCAPE:
+    case DRIVER_EVENT_QUIT_REQUESTED:
+      puts("quitting!");
       goto exit;
-    }
+
+    case DRIVER_EVENT_KEYCHANGED:
+      switch (ev.data.key.code)
+      {
+        case KEY_a:
+          ++bg.g;
+          break;
+
+        case KEY_d:
+          ++bg.b;
+          break;
+
+        case KEY_p:
+          printf("0x%X: (r: %d, g: %d, b: %d)\n", bg.value, bg.r, bg.g, bg.b);
+          break;
+
+        case KEY_ESCAPE:
+          goto exit;
+      }
   }
 
   goto loop;

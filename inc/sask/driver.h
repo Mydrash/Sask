@@ -91,7 +91,8 @@ void driver_destroy_renderer(void *renderer);
 void driver_render_clear(void *renderer);
 
 /**
- * Swap back buffers with front buffers, is this may also be considered "flushing"
+ * Swap back buffers with front buffers, is this may also be considered
+ * "flushing"
  * @param renderer A native renderer
  */
 void driver_render_present(void *renderer);
@@ -102,7 +103,8 @@ void driver_render_present(void *renderer);
  * @param width A width for framebuffer
  * @param height A height for framebuffer
  */
-device_framebuffer_t driver_render_create_buffer(void *renderer, u32 width, u32 height);
+device_framebuffer_t driver_render_create_buffer(void *renderer, u32 width,
+                                                 u32 height);
 
 /**
  * Destroys a framebuffer
@@ -115,7 +117,8 @@ void driver_destroy_buffer(device_framebuffer_t *fb);
  * @param renderer The native renderer
  * @param buffer The framebuffer
  */
-enum driver_result driver_render_buffer(void *renderer, device_framebuffer_t *buffer);
+enum driver_result driver_render_buffer(void *renderer,
+                                        device_framebuffer_t *buffer);
 
 /**
  * Polls a event

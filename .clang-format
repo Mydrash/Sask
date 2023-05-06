@@ -1,0 +1,10 @@
+# vi: ft=yaml
+AlignConsecutiveBitFields:
+  Enabled: true
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: Empty
+BreakBeforeBraces: Allman
+IncludeBlocks: Regroup
+IndentWidth: 2
+BasedOnStyle: Google
+
