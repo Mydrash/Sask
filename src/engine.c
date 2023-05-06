@@ -18,6 +18,7 @@ sask_result_e sask_app_create(sask_app_t *app, void *title, u32 x, u32 y,
 {
   app->h_window = driver_window_create(title, x, y, width, height);
   app->should_quit = false;
+
   for (size_t idx = 0;
        idx < (sizeof(app->key_state) / sizeof(app->key_state[0])); ++idx)
   {

@@ -1,5 +1,6 @@
 #include <sask/driver.h>
 #include <sask/engine.h>
+#include <stddef.h>
 
 void sask_app_next(sask_app_t *app)
 {
@@ -16,7 +17,13 @@ void sask_app_next(sask_app_t *app)
   }
 
   driver_render_clear(app->h_render);
+  driver_render_buffer(app->h_render, &app->buffer);
   driver_render_present(app->h_render);
+
+  for (size_t idx = 0; idx < (app->buffer.width * app->buffer.height); ++idx)
+  {
+    app->buffer.pixels[idx] = (color_t)(u32)0x00000000;
+  }
 }
 
 bool sask_keyboard_pressed(sask_app_t *app, u32 key)

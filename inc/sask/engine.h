@@ -15,7 +15,7 @@ typedef struct sask_app
   driver_buffer_t buffer;
 
   bool should_quit;
-  char key_state[32];
+  char key_state[128];
 } sask_app_t;
 
 sask_result_e sask_init(void);

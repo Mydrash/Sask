@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#include "sask/draw.h"
 #include "sask/engine.h"
 #include "sask/keyboard.h"
 
@@ -8,6 +9,8 @@
 int main(void)
 {
   sask_app_t app;
+  color_t RED = {.r = 0xFF, .g = 0x00, .b = 0x00, .a = 0xFF};
+  u32 x = 0, y = 0;
 
   if (sask_init() != SASK_OK)
   {
@@ -29,10 +32,24 @@ int main(void)
       goto exit;
     }
 
+    if (sask_keyboard_pressed(&app, KEY_a)) x -= 1;
+    if (sask_keyboard_pressed(&app, KEY_d)) x += 1;
+    if (sask_keyboard_pressed(&app, KEY_w)) y -= 1;
+    if (sask_keyboard_pressed(&app, KEY_s)) y += 1;
+
+    if (x <= 0 || x >= 800 || y <= 0 || y >= 420)
+    {
+      x = 0;
+      y = 0;
+    }
+
+    printf("%d, %d\n", x, y);
     if (app.should_quit)
     {
       goto exit;
     }
+
+    sask_draw_filled_rect(&app, x, y, 200, 200, RED);
 
     sask_app_next(&app);
   } while (1);

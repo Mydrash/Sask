@@ -44,8 +44,9 @@ void driver_render_present(void *renderer)
 driver_buffer_t driver_render_create_buffer(void *renderer, u32 width,
                                             u32 height)
 {
-  driver_buffer_t fb = {width, height, width * sizeof(color_t)};
+  driver_buffer_t fb = {width, height};
   fb.pixels = calloc(sizeof(color_t), width * height);
+  fb.pitch = sizeof(color_t) * width;
   fb.referer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
                                  SDL_TEXTUREACCESS_STREAMING, width, height);
   return fb;
