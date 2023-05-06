@@ -47,7 +47,7 @@ typedef struct
   u32 width, height, pitch;
   color_t *pixels;
   void *referer;
-} device_framebuffer_t;
+} driver_buffer_t;
 
 /* Initializes Driver */
 enum driver_result driver_init(void);
@@ -76,7 +76,7 @@ void driver_destroy_window(void *window);
  * @param window A native window
  * @returns A native renderer context
  */
-void *driver_renderer_create(void *window);
+void *driver_render_create(void *window);
 
 /**
  * Destroys a renderer
@@ -103,14 +103,14 @@ void driver_render_present(void *renderer);
  * @param width A width for framebuffer
  * @param height A height for framebuffer
  */
-device_framebuffer_t driver_render_create_buffer(void *renderer, u32 width,
-                                                 u32 height);
+driver_buffer_t driver_render_create_buffer(void *renderer, u32 width,
+                                            u32 height);
 
 /**
  * Destroys a framebuffer
  * @param fb The framebuffer
  */
-void driver_destroy_buffer(device_framebuffer_t *fb);
+void driver_destroy_buffer(driver_buffer_t *fb);
 
 /**
  * Update and render a framebuffer
@@ -118,7 +118,7 @@ void driver_destroy_buffer(device_framebuffer_t *fb);
  * @param buffer The framebuffer
  */
 enum driver_result driver_render_buffer(void *renderer,
-                                        device_framebuffer_t *buffer);
+                                        driver_buffer_t *buffer);
 
 /**
  * Polls a event

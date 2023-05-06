@@ -21,7 +21,7 @@ void *driver_window_create(const char *title, u32 x, u32 y, u32 width,
   return SDL_CreateWindow(title, x, y, width, height, SDL_WINDOW_SHOWN);
 }
 
-void *driver_renderer_create(void *window)
+void *driver_render_create(void *window)
 {
   return SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
@@ -41,18 +41,17 @@ void driver_render_present(void *renderer)
   SDL_RenderPresent(renderer);
 }
 
-device_framebuffer_t driver_render_create_buffer(void *renderer, u32 width,
-                                                 u32 height)
+driver_buffer_t driver_render_create_buffer(void *renderer, u32 width,
+                                            u32 height)
 {
-  device_framebuffer_t fb = {width, height, width * sizeof(color_t)};
+  driver_buffer_t fb = {width, height, width * sizeof(color_t)};
   fb.pixels = calloc(sizeof(color_t), width * height);
   fb.referer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
                                  SDL_TEXTUREACCESS_STREAMING, width, height);
   return fb;
 }
 
-enum driver_result driver_render_buffer(void *renderer,
-                                        device_framebuffer_t *fb)
+enum driver_result driver_render_buffer(void *renderer, driver_buffer_t *fb)
 {
   if (!(SDL2DRV(SDL_UpdateTexture(fb->referer, NULL, fb->pixels, fb->pitch))))
   {
@@ -90,7 +89,7 @@ struct driver_event driver_poll_event(void)
   return event;
 }
 
-void driver_destroy_buffer(device_framebuffer_t *fb)
+void driver_destroy_buffer(driver_buffer_t *fb)
 {
   SDL_DestroyTexture(fb->referer);
   free(fb->pixels);

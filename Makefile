@@ -2,7 +2,7 @@ CC        ?= gcc
 OUT        = out
 DRIVER     = SDL2
 CFLAGS     = -Wall -Iinc -D VERSION=$(VERSION)
-SRC        = 
+SRC        = src/engine.c
 OBJS 	     = $(SRC:%.c=%.o)
 LDFLAGS    =
 VERSION    = 0.1.0_fly
