@@ -3,7 +3,7 @@
 #include <SDL2/SDL_video.h>
 
 #include "sask/driver.h"
-
+#include "sask/keyboard.h"
 #define SDL2DRV(expr) (!(expr) ? DRIVER_OK : DRIVER_FAIL)
 
 enum driver_result driver_init()
@@ -72,13 +72,17 @@ struct driver_event driver_poll_event(void)
   switch (sdl_event.type)
   {
     case SDL_KEYDOWN:
-      event.data.key.code = sdl_event.key.keysym.sym;
+      event.data.key.code = sdl_event.key.keysym.sym > __SASK_KEY_LAST
+                                ? sdl_event.key.keysym.scancode
+                                : sdl_event.key.keysym.sym;
       event.data.key.pressed = true;
       event.type = DRIVER_EVENT_KEYCHANGED;
       break;
 
     case SDL_KEYUP:
-      event.data.key.code = sdl_event.key.keysym.sym;
+      event.data.key.code = sdl_event.key.keysym.sym > __SASK_KEY_LAST
+                                ? sdl_event.key.keysym.scancode
+                                : sdl_event.key.keysym.sym;
       event.data.key.pressed = false;
       event.type = DRIVER_EVENT_KEYCHANGED;
       break;
