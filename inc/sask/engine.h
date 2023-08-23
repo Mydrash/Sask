@@ -1,4 +1,4 @@
-#ifndef _sask_engine
+#pragma once
 #include "sask/driver.h"
 #include "sask/keyboard.h"
 
@@ -65,6 +65,3 @@ void sask_app_next(sask_app_t *app);
  * Gets last engine error
  */
 const char *sask_error(void);
-
-#define _sask_engine
-#endif

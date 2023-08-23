@@ -1,4 +1,4 @@
-#ifndef _sask_types
+#pragma once
 
 #define true 1
 #define false 0
@@ -17,6 +17,3 @@ typedef unsigned long int u64;
 
 typedef float f32;
 typedef double f64;
-
-#define _sask_types
-#endif

@@ -1,4 +1,4 @@
-#ifndef _sask_driver
+#pragma once
 #include <sask/types.h>
 
 enum driver_result
@@ -31,7 +31,7 @@ struct driver_event
 };
 
 /* A ARGB Color */
-typedef union
+typedef union color
 {
   u32 value;
   struct
@@ -43,7 +43,7 @@ typedef union
   };
 } color_m;
 
-typedef struct
+typedef struct driver_buffer
 {
   u32 width, height, pitch;
   color_m *pixels;
@@ -131,6 +131,3 @@ struct driver_event driver_poll_event(void);
  * @param ms Time to delay
  */
 void driver_delay(u32 ms);
-
-#define _sask_driver
-#endif

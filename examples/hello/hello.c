@@ -1,8 +1,7 @@
+#include <sask/draw.h>
+#include <sask/engine.h>
+#include <sask/keyboard.h>
 #include <stdio.h>
-
-#include "sask/draw.h"
-#include "sask/engine.h"
-#include "sask/keyboard.h"
 
 /* Experimental, this example is for testing */
 

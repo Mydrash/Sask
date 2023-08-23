@@ -1,4 +1,5 @@
-#ifndef _sask_kb
+#pragma once
+
 typedef enum sask_key
 {
   KEY_RETURN = '\r',
@@ -78,6 +79,3 @@ typedef enum sask_key
 
   __SASK_KEY_LAST,
 } sask_key_m;
-
-#define _sask_kb
-#endif
